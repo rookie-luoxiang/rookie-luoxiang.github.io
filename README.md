@@ -1,2 +1,2 @@
-# rookie-luoxiang.github.io
+# luoxiang.github.io
 博客

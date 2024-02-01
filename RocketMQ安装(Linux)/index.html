@@ -16,22 +16,22 @@
   <meta name="author" content="lx">
   <meta name="keywords" content="lx,rookie_lx,长风破浪会有时，直挂云帆济沧海,博客,技术,后端,java,python">
   
-    <meta name="description" content="【demo】演示">
+    <meta name="description" content="RocketMQ安装(Linux)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【demo】演示">
-<meta property="og:url" content="https://luoxiang.gitee.io/%E3%80%90demo%E3%80%91%E6%BC%94%E7%A4%BA/index.html">
+<meta property="og:title" content="RocketMQ安装(Linux)">
+<meta property="og:url" content="https://luoxiang.gitee.io/RocketMQ%E5%AE%89%E8%A3%85(Linux)/index.html">
 <meta property="og:site_name" content="lx">
-<meta property="og:description" content="【demo】演示">
+<meta property="og:description" content="RocketMQ安装(Linux)">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-08-26T15:05:11.000Z">
-<meta property="article:modified_time" content="2024-02-01T10:54:29.983Z">
+<meta property="article:published_time" content="2024-02-01T10:54:46.000Z">
+<meta property="article:modified_time" content="2024-02-01T10:55:05.266Z">
 <meta property="article:author" content="lx">
 <meta property="article:tag" content="lx,rookie_lx,长风破浪会有时，直挂云帆济沧海,博客,技术,后端,java,python">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>【demo】演示 - lx</title>
+  <title>RocketMQ安装(Linux) - lx</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -272,7 +272,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="【demo】演示"></span>
+            <span id="subtitle" data-typed-text="RocketMQ安装(Linux)"></span>
           
         </div>
 
@@ -283,8 +283,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-08-26 23:05" pubdate>
-          2023年8月26日
+        <time datetime="2024-02-01 18:54" pubdate>
+          2024年2月1日
         </time>
       </span>
     
@@ -295,7 +295,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6 字
+          1.9k 字
         
       </span>
     
@@ -306,7 +306,7 @@
         
         
         
-          1 分钟
+          9 分钟
         
       </span>
     
@@ -343,21 +343,47 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">【demo】演示</h1>
+            <h1 id="seo-header">RocketMQ安装(Linux)</h1>
             
             
               <div class="markdown-body">
                 
-                <!--
-以上为 hexo 声明信息：
-title: 标题
-date: 时间
-categories: 分类
-excerpt: 摘要信息
-更多配置查看hexo文档：https://hexo.io/zh-cn/docs/
--->
+                <h3 id="一、下载安装包并解压"><a href="#一、下载安装包并解压" class="headerlink" title="一、下载安装包并解压"></a>一、下载安装包并解压</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">wget https://archive.apache.org/dist/rocketmq/4.9.4/rocketmq-all-4.9.4-bin-release.zip<br>unzip rocketmq-all-4.9.4-bin-release.zip<br></code></pre></td></tr></table></figure>
 
-<h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><h2 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h2><h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2>
+<h3 id="二、修改配置文件"><a href="#二、修改配置文件" class="headerlink" title="二、修改配置文件"></a>二、修改配置文件</h3><p>原因：RocketMQ 运行内存初始较大 4G-8G 则需要修改启动内存大小<br>路径：RocketMQ安装目录下的bin文件夹下</p>
+<h4 id="2-1、修改-runserver-sh"><a href="#2-1、修改-runserver-sh" class="headerlink" title="2.1、修改(runserver.sh)"></a>2.1、修改(runserver.sh)</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim rocketmq/bin/runserver.sh   <br></code></pre></td></tr></table></figure>
+
+<p>以上命令打开文件后，修改内存：JAVA_OPT&#x3D;”${JAVA_OPT} -server后面的参数改为1g</p>
+<h4 id="2-2、修改-runbroker-sh"><a href="#2-2、修改-runbroker-sh" class="headerlink" title="2.2、修改(runbroker.sh)"></a>2.2、修改(runbroker.sh)</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim rocketmq/bin/runbroker.sh<br></code></pre></td></tr></table></figure>
+
+<p>以上命令打开文件后，修改内存：JAVA_OPT&#x3D;”${JAVA_OPT} -server后面的参数改为1g</p>
+<h4 id="2-3、修改-broker-conf"><a href="#2-3、修改-broker-conf" class="headerlink" title="2.3、修改(broker.conf)"></a>2.3、修改(broker.conf)</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim  rocketmq/conf/broker.conf<br></code></pre></td></tr></table></figure>
+
+<p>增加配置：注意 9876为rocketmq默认端口可修改    如果是集群 可以增加 brokerIP1&#x3D;服务器IP</p>
+<p>增加内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs shell">brokerClusterName = DefaultCluster<br>brokerName = broker-a<br>brokerId = 0<br>deleteWhen = 04<br>fileReservedTime = 48<br>brokerRole = ASYNC_MASTER<br>flushDiskType = ASYNC_FLUSH<br>namesrvAddr = 外网Ip:9878<br>brokerIP1 = 外网Ip<br>listenPort = 10911<br>autoCreateTopicEnable = true<br>autoCreateSubscriptionGroup = true<br>storePathRootDir = /usr/local/rocketmq-4.9.4/store<br>storePathCommitLog = /usr/local/rocketmq-4.9.4/store/commitlog<br>storePathConsumerQueue = /usr/local/rocketmq-4.9.4/store/consumequeue<br></code></pre></td></tr></table></figure>
+
+<h3 id="三、增加配置文件"><a href="#三、增加配置文件" class="headerlink" title="三、增加配置文件"></a>三、增加配置文件</h3><h4 id="3-1、增加namesrv-properties文件"><a href="#3-1、增加namesrv-properties文件" class="headerlink" title="3.1、增加namesrv.properties文件"></a>3.1、增加namesrv.properties文件</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim namesrv.properties<br></code></pre></td></tr></table></figure>
+
+<p>以上命令打开文件后，在文件中添加   listenPort&#x3D;9878</p>
+<h4 id="3-2、增加broker-properties文件"><a href="#3-2、增加broker-properties文件" class="headerlink" title="3.2、增加broker.properties文件"></a>3.2、增加broker.properties文件</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim broker.properties<br></code></pre></td></tr></table></figure>
+
+<p>以上命令打开文件后，在文件中添加  brokerIP1&#x3D;外网Ip</p>
+<h3 id="四、开放端口-配置入站出站规则"><a href="#四、开放端口-配置入站出站规则" class="headerlink" title="四、开放端口(配置入站出站规则)"></a>四、开放端口(配置入站出站规则)</h3><p>9876：rocketmq服务端口<br>10911：rocketmq对外监听端口<br>10909：rocketmq主从同步端口</p>
+<h3 id="五、启动和停止-rocketmq服务"><a href="#五、启动和停止-rocketmq服务" class="headerlink" title="五、启动和停止 rocketmq服务"></a>五、启动和停止 rocketmq服务</h3><h4 id="5-1、启动服务"><a href="#5-1、启动服务" class="headerlink" title="5.1、启动服务"></a>5.1、启动服务</h4><p>注意：两个都要启动  都在rocketmq安装目录下的bin文件夹下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">nohup sh bin/mqnamesrv -c /usr/local/rocketmq-4.9.4/conf/namesrv.properties &gt; namesrv.log &amp;<br>nohup sh bin/mqbroker -n IP(自己IP):9878 -c /usr/local/rocketmq-4.9.4/conf/broker.conf &gt; broker.log &amp;<br></code></pre></td></tr></table></figure>
+
+<h4 id="5-2、停止服务"><a href="#5-2、停止服务" class="headerlink" title="5.2、停止服务"></a>5.2、停止服务</h4><p>注意：先停broker服务  再停namesrv服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">sh bin/mqshutdown broker<br>sh bin/mqshutdown namesrv<br></code></pre></td></tr></table></figure>
+
+<h3 id="六、-安装RocketMQ监控平台"><a href="#六、-安装RocketMQ监控平台" class="headerlink" title="六、(安装RocketMQ监控平台)"></a>六、(安装RocketMQ监控平台)</h3><p>注意：RocketMQ监控平台为Java项目</p>
+<h5 id="6-1、下载"><a href="#6-1、下载" class="headerlink" title="6.1、下载"></a>6.1、下载</h5><p>下载 rocketmq-console-ng  (地址1版本新)</p>
+<p>地址1： <a target="_blank" rel="noopener" href="https://gitee.com/ralph81/rocketmq-console?_from=gitee_search">https://gitee.com/ralph81/rocketmq-console?_from=gitee_search</a><br>地址2： <a target="_blank" rel="noopener" href="https://github.com/apache/rocketmq-externals/tree/release-rocketmq-console-1.0.0">https://github.com/apache/rocketmq-externals/tree/release-rocketmq-console-1.0.0</a> </p>
+<h5 id="6-2、安装和打包-maven命令打包"><a href="#6-2、安装和打包-maven命令打包" class="headerlink" title="6.2、安装和打包(maven命令打包)"></a>6.2、安装和打包(maven命令打包)</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">mvn clean install -Dmaven.test.skip=<span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="6-3、启动RocketMQ监控平台"><a href="#6-3、启动RocketMQ监控平台" class="headerlink" title="6.3、启动RocketMQ监控平台"></a>6.3、启动RocketMQ监控平台</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">nohup java -jar -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m rocketmq-console-ng-2.0.0.jar &amp;<br></code></pre></td></tr></table></figure>
+
+
                 
               </div>
             
@@ -397,15 +423,15 @@ excerpt: 摘要信息
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BA%94%E7%94%A8%E5%AE%9E%E4%BE%8B/" title="线程池应用实例">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">线程池应用实例</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/Java%20Linux%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/" title="jdk Linux环境变量配置">
+                        <span class="hidden-mobile">jdk Linux环境变量配置</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>

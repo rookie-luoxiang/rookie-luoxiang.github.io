@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>Windows配置一个或多个git公钥</title>
+    <link href="/Windows%E9%85%8D%E7%BD%AE%E4%B8%80%E4%B8%AA%E6%88%96%E5%A4%9A%E4%B8%AAgit%E5%85%AC%E9%92%A5/"/>
+    <url>/Windows%E9%85%8D%E7%BD%AE%E4%B8%80%E4%B8%AA%E6%88%96%E5%A4%9A%E4%B8%AAgit%E5%85%AC%E9%92%A5/</url>
+    
+    <content type="html"><![CDATA[<h3 id="一、Windows安装git工具"><a href="#一、Windows安装git工具" class="headerlink" title="一、Windows安装git工具"></a>一、Windows安装git工具</h3><p>下载地址： <a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a>      </p><p>说明：安装为傻瓜式，自行安装</p><h3 id="二、-生成SSH密钥"><a href="#二、-生成SSH密钥" class="headerlink" title="二、 生成SSH密钥"></a>二、 <strong>生成SSH密钥</strong></h3><p> 如果你还没有SSH密钥对，你需要先生成。打开Git Bash或命令提示符进入用户目录下的ssh，运行以下命令来生成一个新的SSH密钥(如果你已经有一个，可以跳过这一步)，如果用户目录没有ssh，可以使用命令(mkdir .ssh)创建</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ssh-keygen -t rsa -b 4096 -C &quot;你的邮箱&quot;<br></code></pre></td></tr></table></figure><p>命令参数说明： </p><pre><code class="hljs">-t 即指定密钥的类型，密钥的类型有两种，一种是RSA，一种是DSA -b 指定密钥长度。对于RSA密钥，最小要求768位，默认是2048位。命令中的4096指的是RSA密钥长度为4096位，可以忽略  -b 4096使用默认</code></pre><h3 id="三、-为不同的账户生成特定的SSH密钥"><a href="#三、-为不同的账户生成特定的SSH密钥" class="headerlink" title="三、 为不同的账户生成特定的SSH密钥"></a>三、 为不同的账户生成特定的SSH密钥</h3><p> 为了区分不同账户的SSH密钥，你需要为每个账户生成一个不同的SSH密钥。例如，如果你想为GitHub和GitLab生成两个不同的SSH密钥，你可以这样操作</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">ssh-keygen -t rsa -b 4096 -C &quot;你的邮箱&quot; -f ~/.ssh/github_rsa<br>ssh-keygen -t rsa -b 4096 -C &quot;你的邮箱&quot; -f ~/.ssh/gitlab_rsa<br></code></pre></td></tr></table></figure><p>命令参数说明： </p><pre><code class="hljs">-f 指定将生成的ssh-key保存在该路径文件下</code></pre><h3 id="四、-配置Git使用正确的SSH命令"><a href="#四、-配置Git使用正确的SSH命令" class="headerlink" title="四、 配置Git使用正确的SSH命令"></a>四、 配置Git使用正确的SSH命令</h3><p> 为了让Git知道在连接到特定主机时使用哪个SSH密钥，你需要编辑<code>~/.ssh/config</code>文件(如果不存在，创建它，命令：touch config)。在这个文件中，你可以指定每个主机应该使用的密钥</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">github</span><br>Host github.com<br>  Host github<br>  HostName github.com<br>  User xxx@qq.com<br>  IdentityFile ~/.ssh/github_rsa.pub<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">gitlab</span><br>Host gitlab.com<br>  Host gitlab<br>  HostName gitlab.com<br>  User xxx@qq.com<br>  IdentityFile ~/.ssh/gitlab_rsa.pub<br></code></pre></td></tr></table></figure><p>配置文件参数说明：</p><pre><code class="hljs">    Host : Host可以看作是一个你要识别的模式，对识别的模式，进行配置对应的的主机名和ssh文件    HostName : 要登录主机的主机名( 服务器IP)    Port 22 : 端口    User : 用户名    IdentityFile : 指明上面User对应的identityFile路径，认证文件</code></pre><h3 id="五、-添加SSH公钥到你的账户"><a href="#五、-添加SSH公钥到你的账户" class="headerlink" title="五、 添加SSH公钥到你的账户"></a>五、 添加SSH公钥到你的账户</h3><p> 登录到你的GitHub、GitLab或其他Git仓库托管服务的账户，并将相应的SSH公钥添加到你的账户设置中。举例(github)：登录github 在右上角头像 —&gt; Setttings —&gt; SSH and GPG keys —&gt;New SSH keys</p><h3 id="六：测试是否配置成功"><a href="#六：测试是否配置成功" class="headerlink" title="六：测试是否配置成功"></a>六：测试是否配置成功</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ssh -T git@github.com   或者   sh -T git@gitlab.com<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>blog</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>微信支付(V3)和退款</title>
     <link href="/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98(V3)%E5%92%8C%E9%80%80%E6%AC%BE/"/>
     <url>/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98(V3)%E5%92%8C%E9%80%80%E6%AC%BE/</url>

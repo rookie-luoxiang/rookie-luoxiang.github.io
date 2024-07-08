@@ -24,7 +24,7 @@
 <meta property="og:description" content="Windows配置一个或多个git公钥">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-04T07:10:29.000Z">
-<meta property="article:modified_time" content="2024-07-04T08:38:02.330Z">
+<meta property="article:modified_time" content="2024-07-08T11:51:39.529Z">
 <meta property="article:author" content="lx">
 <meta property="article:tag" content="lx,rookie_lx,长风破浪会有时，直挂云帆济沧海,博客,技术,后端,java,python">
 <meta name="twitter:card" content="summary_large_image">
@@ -356,7 +356,7 @@
 <p>命令参数说明： </p>
 <pre><code class="hljs">-t 即指定密钥的类型，密钥的类型有两种，一种是RSA，一种是DSA 
 
--b 指定密钥长度。对于RSA密钥，最小要求768位，默认是2048位。命令中的4096指的是RSA密钥长度为					4096位，可以忽略  -b 4096使用默认
+-b 指定密钥长度。对于RSA密钥，最小要求768位，默认是2048位。命令中的4096指的是RSA密钥长度为4096位，可以忽略  -b 4096使用默认
 </code></pre>
 <h3 id="三、-为不同的账户生成特定的SSH密钥"><a href="#三、-为不同的账户生成特定的SSH密钥" class="headerlink" title="三、 为不同的账户生成特定的SSH密钥"></a>三、 为不同的账户生成特定的SSH密钥</h3><p> 为了区分不同账户的SSH密钥，你需要为每个账户生成一个不同的SSH密钥。例如，如果你想为GitHub和GitLab生成两个不同的SSH密钥，你可以这样操作</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">ssh-keygen -t rsa -b 4096 -C &quot;你的邮箱&quot; -f ~/.ssh/github_rsa<br>ssh-keygen -t rsa -b 4096 -C &quot;你的邮箱&quot; -f ~/.ssh/gitlab_rsa<br></code></pre></td></tr></table></figure>
